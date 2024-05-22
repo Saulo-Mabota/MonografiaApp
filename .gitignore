@@ -45,6 +45,7 @@ iOS
 .settings/
 *.sublime-project
 *.sublime-workspace
+.DS_Store
 
 # Visual Studio Code
 .vscode/*
