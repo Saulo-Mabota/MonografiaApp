@@ -1,0 +1,244 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import '@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+
+// .circleBase {
+//     border-radius: 50%;
+//   }
+  
+//   .type1 {
+//     position: absolute;
+//     width: 280px;
+//     height: 280px;
+//     background: linear-gradient(90deg, #2a58a8 0%, #2201A3 100%);
+//     box-shadow: 0px 1px 10px rgba(98, 140, 255, 0.5);
+//     top: -50px;
+//     left: -50px;
+//   }
+  
+//   .type2 {
+//     width: 100px;
+//     height: 100px;
+//     background: #000;
+//     //  background: linear-gradient(135deg, #92a0e0 0%, #4b088f 100%);
+//   }
+  
+//   .circle1 {
+//     margin-left: 180px;
+//     margin-top: 50px;
+//   }
+  
+//   .circle2 {
+//     position: absolute;
+//     top: 150px;
+//     left: -20px;
+//   }
+
+
+
+
+
+
+
+
+
+
+.circleBase {
+  border-radius: 50%;
+}
+
+.type1 {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);
+  box-shadow: 0px 1px 10px rgba(98, 140, 255, 0.5);
+  top: -50px;
+  left: -50px;
+}
+
+
+.type2 {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, #3880ff 0%, #764ba2 100%);
+  transform: rotate(360deg);
+}
+
+.circle1 {
+  margin-left: 180px;
+  margin-top: 50px; transform: rotate(-95deg);
+}
+
+
+.circle2 {
+  position: absolute;
+  top: 150px;
+  left: -20px;
+  border-radius: 50% 50% 0 50%;
+  transform: rotate(-95deg);
+}
+
+
+
+
+
+// .circleBase {
+//   border-radius: 50%;
+// }
+
+// .type1 {
+//   position: absolute;
+//   width: 280px;
+//   height: 280px;
+//   background: linear-gradient(90deg, #2a58a8 0%, #2201A3 100%);
+//   box-shadow: 0px 1px 10px rgba(98, 140, 255, 0.5);
+//   top: -50px;
+//   left: -50px;
+// }
+
+// .type2 {
+//   width: 100px;
+//   height: 100px;
+//   background: linear-gradient(90deg, #b92b27 0%, #1565c0 100%);
+// }
+
+// .circle1 {
+//   margin-left: 180px;
+//   margin-top: 50px;
+// }
+
+// .circle2 {
+//   position: absolute;
+//   top: 150px;
+//   left: -20px;
+// }
+
+
+  
+  .welcomeMessage {
+    position: absolute;
+    top: 70px;
+    left: 50px;
+    p {
+      font-weight: bold;
+      font-size: 1.8rem;
+      margin-top: 5px;
+    }
+  }
+  
+  .error {
+    font-size: 0.75rem;
+  }
+//   ion-icon {
+//     font-size: 28px; //Preferred size here
+// }
+
+.custom-card-header {
+  background-image: url('/assets/mdesign.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.custom-logo {
+  background-image: url('/assets/mdesign.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+ion-alert.alert-custom-alert::part(alert) {
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  border-radius: 8px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+// .circleBase {
+//   border-radius: 50%;
+// }
+
+// .type1 {
+//   position: absolute;
+//   width: 280px;
+//   height: 280px;
+//   background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);
+//   box-shadow: 0px 1px 10px rgba(98, 140, 255, 0.5);
+//   top: -50px;
+//   left: -50px;
+// }
+
+// .type2 {
+//   width: 100px;
+//   height: 100px;
+//   background: linear-gradient(90deg, #a66d6b 0%, #1565c0 100%);
+//   position: relative;
+// }
+
+// .type2::before {
+//   content: "";
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   width: 8px;
+//   height: 8px;
+//   background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+//   border-radius: 50%;
+//   animation: dotAnimation 5s infinite linear;
+// }
+
+// @keyframes dotAnimation {
+//   0% {
+//     transform: translate(-50%, -50%) rotate(0deg) translateY(0px) scale(0);
+//   }
+//   100% {
+//     transform: translate(-50%, -50%) rotate(720deg) translateY(-100px) scale(1);
+//   }
+// }
+
+// .circle1 {
+//   margin-left: 180px;
+//   margin-top: 50px;
+// }
+
+// .circle2 {
+//   position: absolute;
+//   top: 150px;
+//   left: -20px;
+// }

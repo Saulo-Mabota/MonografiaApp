@@ -1,0 +1,106 @@
+ion-avatar {
+  width: 600px;
+  height: 300px;
+}
+
+.preview {
+  margin-top: 0px;
+  display: flex;
+  justify-content: center;
+}
+
+.fallback {
+  width: 600px;
+  height: 300px;
+  border-radius: 50%;
+  background: #bfbfbf;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 500;
+}
+
+swiper-container {
+  width: 100%;
+  height: 250px;
+  --swiper-pagination-bullet-inactive-color: var(--ion-color-step-200, #cccccc);
+  --swiper-pagination-color: var(--ion-color-primary, #3880ff);
+}
+
+swiper-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+// ion-thumbnail.thumbnail-md {
+//   width: 80px;
+//   height: 60px;
+// }
+
+// ion-skeleton-text {
+//   display: block;
+//   width: 100%;
+//   height: 1.2em;
+//   margin-bottom: 0.4em;
+//   border-radius: 4px;
+//   background-color: #f2f2f2;
+//   animation: fadeInOut 1s infinite;
+// }
+
+// @keyframes fadeInOut {
+//   0% {
+//     opacity: 0.6;
+//   }
+
+//   50% {
+//     opacity: 0.8;
+//   }
+
+//   100% {
+//     opacity: 0.6;
+//   }
+// }
+
+.skeleton {
+  width: 100%;
+  height: 100%;
+  background-color: #f0f0f0;
+  /* Set the background color of the skeleton */
+  animation: skeleton-loading 1.5s infinite ease-in-out;
+  /* Add animation effect */
+}
+
+@keyframes skeleton-loading {
+  0% {
+    opacity: 0.6;
+    /* Set the initial opacity */
+  }
+
+  50% {
+    opacity: 0.3;
+    /* Set the opacity halfway through the animation */
+  }
+
+  100% {
+    opacity: 0.6;
+    /* Set the opacity at the end of the animation */
+  }
+}
+
+.loadin-state,
+.content {
+  position: absolute;
+  top: 6%;
+  left: 0;
+  width: 100%;
+
+}
+
+.wrapper {
+  position: relative;
+  min-height: 320px;
+}
+

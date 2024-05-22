@@ -1,0 +1,7 @@
+{
+  "name": "souCEAD",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

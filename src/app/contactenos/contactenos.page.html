@@ -1,0 +1,76 @@
+<ion-header class="title-header" [translucent]="true">
+  <ion-toolbar color="medium">
+    <ion-img src="/assets/logof.png" alt="Logo"></ion-img>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/profile']">
+        <ion-icon style="font-size: 28px;" name="person-circle-outline"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" id="popover5">
+        <ion-icon style="font-size: 25px;" name="ellipsis-vertical-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-popover #popover trigger="popover5" triggerAction="click" size="auto">
+      <ng-template>
+        <ion-content class="ion-padding ion-text-center" (click)="logout()">
+          <ion-label color="danger">Terminar a sessão :( </ion-label>
+        </ion-content>
+      </ng-template>
+    </ion-popover>
+  </ion-toolbar>
+  <ion-toolbar scrolly="false">
+    <ion-card>
+      <ion-card-header class="custom-card-header">
+        <ion-card-title>Fale connosco!</ion-card-title>
+        <ion-card-subtitle>Responderemos o mais breve possível :)</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  </ion-toolbar>
+  <!-- <ion-toolbar scrolly="false">
+    <ion-searchbar></ion-searchbar>
+  </ion-toolbar> -->
+</ion-header>
+<ion-content color="light">
+  <app-empty-screen *ngIf="(chatRooms | async)?.length == 0" [model]="model">
+  </app-empty-screen>
+  <ng-container *ngIf="(chatRooms | async) as rooms">
+    <ion-list *ngIf="rooms.length > 0">
+      <ion-list-header class="ion-paddig-bottom" color="light">Conversas recentes:</ion-list-header>
+      <ion-item *ngFor="let item of rooms" (click)="getChat(item)" [detail]="true">
+        <ng-container *ngIf="(item?.user | async) as user">
+          <ion-avatar slo="start">
+            <img [src]="getUser(user)?.imageUrl" />
+          </ion-avatar>
+          <ion-label>
+            &nbsp; {{getUser(user)?.username}}
+          </ion-label>
+        </ng-container>
+
+      </ion-item>
+    </ion-list>
+  </ng-container>
+  <ion-fab horizontal="start">
+    <ion-fab-button color="success" (click)="newChat()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-modal #new_chat [isOpen]="open_new_chat" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-title> Nova conversa</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cancel()">Cancelar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+        <ion-toolbar scrolly="false">
+          <ion-searchbar (ionInput)="searchUsers($event)"></ion-searchbar>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content color="light">
+        <ion-list class="ion-margin-top" [style.background]="'transparent'" lines="none">
+          <app-user-list *ngFor="let user of filteredUsers" [item]="user" (onClick)="startChat($event)"></app-user-list>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal> 
+</ion-content>

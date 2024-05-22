@@ -1,0 +1,174 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-img src="/assets/logof.png" alt="Logo"></ion-img>
+
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/profile']">
+        <ion-icon style="font-size: 28px;" name="person-circle-outline"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" id="popover11">
+        <ion-icon style="font-size: 25px;" name="ellipsis-vertical-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-popover #popover trigger="popover11" triggerAction="click" size="auto">
+      <ng-template>
+        <ion-content class="ion-padding ion-text-center" (click)="logout()">
+          <ion-label color="danger">Terminar a sessão :( </ion-label>
+          <!-- <ion-icon color="danger"  style="font-size: 25px;" name="exit-sharp"></ion-icon> -->
+        </ion-content>
+      </ng-template>
+    </ion-popover>
+  </ion-toolbar>
+  <ion-toolbar scrolly="false">
+    <ion-searchbar (ionInput)="searchNotes($event)"></ion-searchbar>
+    <swiper-container #swiper (afterinit)="swiperReady()" (slidechange)="swiperSlideChanged($event)" [loop]="true"
+      [autoplay]="true" [delay]="1000" [zoom]="true" [pagination]="true">
+      <swiper-slide *ngFor="let note of filteredNotes ">
+        <div class="swiper-zoom-container">
+          <img *ngIf="note?.imageUrl" [src]="note?.imageUrl" />
+        </div>
+      </swiper-slide>
+      <swiper-slide><img alt="My image name" src="/assets/slide1.png"></swiper-slide>
+      <!-- <swiper-slide><img alt="My image name" src="/assets/slide1.png"></swiper-slide> -->
+    </swiper-container>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="wrapper">
+    <ng-container *ngIf="loading; else content">
+      <!-- <div @fadeInOut class="loadin-state"> -->
+        <ion-list @fadeInOut class="loadin-state">
+          <ion-card>
+            <ion-card-header color="medium" class="custom-card-header">
+              <ion-card-title>
+                <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+              </ion-card-title>
+              <ion-card-subtitle>
+                <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+              </ion-card-subtitle>
+            </ion-card-header>
+          </ion-card>
+          <ion-item>
+            <ion-thumbnail slot="start">
+              <div class="skeleton"></div>
+            </ion-thumbnail>
+            <ion-label>
+              <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+              <p>
+                <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+          <!-- Repeat the above skeleton structure for other items -->
+          <ion-item>
+            <ion-thumbnail slot="start">
+              <div class="skeleton"></div>
+            </ion-thumbnail>
+            <ion-label>
+              <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+              <p>
+                <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+          <!-- Repeat the above skeleton structure for other items -->
+          <ion-item>
+            <ion-thumbnail slot="start">
+              <div class="skeleton"></div>
+            </ion-thumbnail>
+            <ion-label>
+              <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+              <p>
+                <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+          <!-- Repeat the above skeleton structure for other items -->
+        </ion-list>
+      <!-- </div> -->
+    </ng-container>
+
+    <ng-template #content>
+      <!-- <div @fadeInOut class="content"> -->
+        <ion-list @fadeInOut class="content">
+          <ion-card>
+            <ion-card-header class="custom-card-header">
+              <ion-card-title>Informações gerais</ion-card-title>
+              <ion-card-subtitle>Informações direcionadas a todos</ion-card-subtitle>
+            </ion-card-header>
+          </ion-card>
+           <ion-item button *ngFor="let note of filteredNotes" (click)="openNote(note)">
+            <ion-thumbnail class="thumbnail-md" slot="start">
+              <div class="preview">
+                <img *ngIf="note.imageUrl; else placeholder_avatar;" [src]="note?.imageUrl" />
+                <ng-template #placeholder_avatar>
+                  <div class="fallback"></div>
+                </ng-template>
+              </div>
+            </ion-thumbnail>
+            <ion-label>
+              {{ note.title }}
+              <p>{{ note.createdAt.toDate() | date: 'medium' }}</p>
+            </ion-label>
+            <ion-badge slot="end">{{ note.categoria.nome }}</ion-badge>
+          </ion-item> 
+          <!-- <ion-list>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="6" *ngFor="let note of filteredNotes">
+                  <ion-item button (click)="openNote(note)">
+                    <ion-thumbnail class="thumbnail-md" slot="start">
+                      <div class="preview">
+                        <img *ngIf="note.imageUrl; else placeholder_avatar;" [src]="note?.imageUrl" />
+                        <ng-template #placeholder_avatar>
+                          <div class="fallback"></div>
+                        </ng-template>
+                      </div>
+                    </ion-thumbnail>
+                    <ion-label>
+                      {{ note.title }}
+                      <p>{{ note.createdAt.toDate() | date: 'medium' }}</p>
+                    </ion-label>
+                    <ion-badge slot="end">{{ note.categoria.nome }}</ion-badge>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-list> -->
+          
+        </ion-list>
+      <!-- </div> -->
+    </ng-template>
+
+  </div>
+</ion-content>
+
+
+
+
+
+
+<!-- <ion-buttons slot="start">
+      <ion-button color="primary" fill="solid">
+        <ion-icon name="newspaper-sharp"></ion-icon> Sou CEAD
+      </ion-button>
+    </ion-buttons> -->
+<!-- <ion-buttons slot="end"></ion-buttons> -->
+<!-- <ion-buttons slot="end">
+      <ion-button [routerLink]="['/profile']">
+        <ion-icon name="person-circle-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="logout()">
+        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->

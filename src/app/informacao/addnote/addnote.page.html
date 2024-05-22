@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>Adicionar informação</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="credentials">
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item>
+            <ion-select interface="action-sheet" label-placement="floating" label="Categoria" placeholder="Selecione a categoria da notificação" (ionChange)="handleChange($event)" formControlName="categoria">
+              <ion-select-option *ngFor="let allcategory of allcategories" value="{{allcategory.id}}">{{allcategory.nome}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-label color="success" *ngFor="let log of logs">{{ log }}</ion-label>
+        </ion-list>
+        <ion-list>
+          <ion-item>
+            <!-- <ion-label position="stacked">Titulo</ion-label> -->
+            <ion-input
+              labelPlacement="stacked"
+             [clearInput]="true"
+            value="Default value"
+            label="Titulo" 
+            placeholder="Ex.: Sistema de gestao da informação entra em funcionamento"
+            name="title"
+             type="text" 
+             required 
+              formControlName="title"></ion-input>
+            <ion-note slot="error" *ngIf="(title?.dirty || title?.touched) && title?.errors"
+              class="form-control-feedback">Titulo invalido!</ion-note>
+          </ion-item>
+    
+          <ion-item>
+            <ion-textarea 
+            label="Informação" 
+            name="text"
+             rows="8"
+              type="text"
+               formControlName="text" 
+               required
+               placeholder="Ex.: Poderão candidatar-se às provas de Exames de Admissão, os indivíduos que preencham os seguintes requisitos: - Graduados do Ensino Secundário Geral que tenham concluído a 12ª classe do Sistema Nacional de Educação (SNE); - Graduados habilitados com um nível equivalente à 12ª classe do SNE."
+               helperText="Descreva a Informação"
+               [counter]="true"
+               [maxlength]="3000"
+               labelPlacement="floating"
+               ></ion-textarea>
+            <div slot="error" *ngIf="(text?.dirty || text?.touched) && text?.errors" class="form-control-feedback">Texto
+              da notificação invalido!</div>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="full" color="success" (click)="registerNote()">
+          <ion-icon name="cloud-upload-outline" slot="start"></ion-icon> Adicionar Imagem & Publicar
+        </ion-button>
+        <ion-button fill="clear" *ngIf="isLoading">
+          <ion-spinner name="crescent" color="primary"></ion-spinner>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

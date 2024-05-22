@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>Detalhes do utilizador!</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="userData">
+    <form [formGroup]="signupForm">
+    <ion-item>
+      <ion-select aria-label="Categoria" placeholder="Trocar a categoria do utilizador!" (ionChange)="handleChange($event)" formControlName="category">
+        <ion-select-option *ngFor="let allcategory of allcategories" value="{{allcategory.id}}">{{allcategory.nome}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-label color="success" id="label" *ngFor="let log of logs">{{ log }}</ion-label>
+ </form>  
+ <ion-item>
+  <ion-label  position="stacked">Categoria previamente selecionada.</ion-label>
+  <ion-input aria-label="" disabled [(ngModel)]="userData.category.nome"></ion-input>
+</ion-item>
+    <ion-item>
+      <ion-label position="stacked">Nome</ion-label>
+      <ion-input aria-label="" [(ngModel)]="userData.username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input aria-label="" disabled [(ngModel)]="userData.email"></ion-input>
+    </ion-item>
+   
+    <ion-button expand=""  (click)="updateUserInfo()"  color="dark" >
+      <ion-icon name="save" slot="start"></ion-icon> ATUALIZAR
+    </ion-button>
+    <!-- (click)="deleteNote()" -->
+   
+    <ion-button expand="" disabled color="danger" >
+      <ion-icon name="trash" slot="start"></ion-icon> APAGAR
+    </ion-button>
+  
+  </div>
+
+</ion-content>

@@ -1,0 +1,77 @@
+ion-header.title-header {
+    ion-toolbar{
+        font-family:"fantasy", cursive !important;
+        ion-title{
+            letter-spacing: 2px;
+            font-size: 1.8rem !important;
+        }
+    }
+   
+}
+ion-content{
+    ion-list{
+        ion-list-header{
+            font-weight: 609;
+            font-size: 1rem;
+        }
+        ion-item{
+            margin-top: 2vh;
+            ion-label{
+                font-size: 1.2rem;
+                p{
+                    margin-top: 3px;
+                }
+            }
+            ion-text{
+                font-size: 0.9rem;
+            }
+        }
+    }
+}
+
+// ion-icon {
+//     font-size: 40px; //Preferred size here
+// }
+
+
+.skeleton {
+    width: 100%;
+    height: 100%;
+    background-color: #f0f0f0;
+    /* Set the background color of the skeleton */
+    animation: skeleton-loading 1.5s infinite ease-in-out;
+    /* Add animation effect */
+  }
+  
+  @keyframes skeleton-loading {
+    0% {
+      opacity: 0.6;
+      /* Set the initial opacity */
+    }
+  
+    50% {
+      opacity: 0.3;
+      /* Set the opacity halfway through the animation */
+    }
+  
+    100% {
+      opacity: 0.6;
+      /* Set the opacity at the end of the animation */
+    }
+  }
+  
+  .loadin-state,
+  .content {
+    position: absolute;
+    top: 6%;
+    left: 0;
+    width: 100%;
+  
+  }
+  
+  .wrapper {
+    position: relative;
+    min-height: 320px;
+  }
+  
+  

@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-title>{{information?.title}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="information">
+    <div class="preview">
+        <img *ngIf="information.imageUrl; else placeholder_avatar;" [src]="information.imageUrl"/>
+        <ng-template #placeholder_avatar>
+          <div class="fallback">
+          </div>
+        </ng-template>
+    </div>
+    <ion-card-header>
+      <ion-card-title>{{ information.title }}</ion-card-title>
+      <ion-card-subtitle>{{ information.createdAt['toDate']() | date:'medium' }}</ion-card-subtitle>
+    </ion-card-header> 
+     <ion-card-content>
+       <ion-label color="medium">{{ information.text}}</ion-label>
+       <!-- <ion-item lines="none">
+         <ion-icon color="success" name="calendar-outline" slot="start"></ion-icon>
+         <ion-label>...</ion-label>
+       </ion-item> -->
+       <ion-item lines="none">
+         <ion-icon color="success" name="globe-outline" slot="start"></ion-icon>
+         <ion-label>Para: {{ information.categoria.nome}}</ion-label>
+         <ion-buttons slot="end">
+          <ion-button color="primary" fill="solid">
+            <ion-icon name="newspaper-sharp"></ion-icon> I.M.C.C.E.A.D.
+          </ion-button>
+        </ion-buttons>
+        </ion-item>
+      
+     </ion-card-content>
+   </ion-card>
+</ion-content>
+<!-- <ion-footer >
+  <ion-toolbar class="ion-text-center">
+  <ion-buttons slot="start">
+    <ion-button color="primary" fill="solid">
+      <ion-icon name="newspaper-sharp"></ion-icon> Sou CEAD
+    </ion-button>
+  </ion-buttons>
+  </ion-toolbar>
+</ion-footer> -->

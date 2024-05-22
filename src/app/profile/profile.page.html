@@ -1,0 +1,49 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Perfil do utilizador</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/notificacao"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  *ngIf="userData" class="ion-padding">
+  <div class="preview">
+    <ion-item>
+      <ion-avatar (click)="changeImage()">
+        <img *ngIf="userData.imageUrl; else placeholder_avatar;" [src]="userData.imageUrl" />
+        <ng-template #placeholder_avatar>
+          <div class="fallback">
+            <p>Select avatar</p>
+          </div>
+        </ng-template>
+      </ion-avatar>
+    </ion-item>
+  </div>
+  <p>...</p>
+  <ion-row>
+    <ion-col>
+      <ion-list>
+        <ion-item>
+          <ion-label position="stacked">Nome do utlizador</ion-label>
+          <ion-textarea label="Nome: " [(ngModel)]="userData.username" (input)="formChanged = true"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Email</ion-label>
+          <ion-textarea label="Email: " disabled [(ngModel)]="userData.email"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Categoria</ion-label>
+          <ion-textarea label="Categoria: " disabled [(ngModel)]="userData.category.nome"></ion-textarea>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-button expand="full"  color="dark" (click)="updateUserProfile()" [disabled]="!formChanged">
+        <ion-icon name="save" slot="start"></ion-icon> ATUALIZAR
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

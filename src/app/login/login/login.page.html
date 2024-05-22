@@ -1,0 +1,118 @@
+
+
+<ion-content [fullscreen]="true">
+ 
+  <div class="login-background"></div>
+  <div class="circleBase type2 circle1"></div>
+  <div class="circleBase type1"></div>
+  <div class="circleBase type2 circle2"></div>
+
+  <ion-label class="welcomeMessage">
+    <ion-text color="light">Bem-vindo de Volta,</ion-text>
+    <ion-text color="white">
+      <p>Entrar!</p>
+    </ion-text> 
+  </ion-label>
+
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+    <ion-list lines="none" class="ion-margin ion-padding ion-text-center">
+      <ion-toggle slot="start" mode="ios" [checked]="darkMode" (ionChange)="toggleDarkMode()"> Modo escuro </ion-toggle>
+      <!-- <ion-item class="ion-margin-vertical"> -->
+        <div class="logo-container">
+          <img class="logo" src="/assets/logo.png" alt="Logo">
+          <!-- <div class="circleBase type1 circle1"></div> -->
+        </div>
+      <!-- </ion-item> -->
+    
+     
+   
+      <ion-item class="ion-margin-vertical">
+        <ion-icon name="mail-outline" slot="end" color="medium">
+        </ion-icon>
+        <ion-input formControlName="email" placeholder="Escreva email valido.">
+        </ion-input>
+      </ion-item>
+      <ion-text class="ion-text-left" color="danger"
+      *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+      <p class="error">*Por favor, escreva um email válido!</p>
+    </ion-text>
+
+      <ion-item class="ion-margin-vertical">
+        <ion-icon (click)="onChange()" [name]="isTypePassword ? 'lock-closed-outline' : 'lock-open-outline'" slot="end"
+          [color]="isTypePassword ? 'medium' : 'primary'">
+        </ion-icon>
+        <ion-input formControlName="password" [type]="isTypePassword ? 'password' : 'text'"
+          placeholder="Escreva palavra passe.">
+        </ion-input>
+      </ion-item>
+      <ion-text class="ion-text-left" color="danger" *ngIf="form.get('password')?.hasError('required') && form.get('password')?.touched">
+        <p class="error">*Por favor, escreva uma palavra-passe válida!</p>
+      </ion-text>
+      
+      <ion-text class="ion-text-left" color="danger" *ngIf="form.get('password')?.hasError('minlength') && form.get('password')?.dirty">
+        <p class="error">*A palavra-passe deve conter no mínimo 8 caracteres</p>
+      </ion-text>
+
+     
+      <ion-button color="primary" shape="round" (click)="onSubmit()">Entrar</ion-button>
+      <ion-button fill="clear" *ngIf="isLoading">
+        <ion-spinner name="crescent" color="primary"></ion-spinner>
+      </ion-button>
+      <p class="signup">
+        <ion-note>
+          Não tens conta? <ion-text routerLink="/login/singup" color="primary">Registrar-se</ion-text>
+        </ion-note>
+      </p>
+      <ion-row class="ion-margin-vertical">
+        <ion-col size="6" class="alignItems">
+            <div align="left">
+               <!-- <ion-toggle slot="end" mode="ios" [checked]="darkMode" (ionChange)="toggleDarkMode()"> Modo escuro </ion-toggle> -->
+     
+            </div>
+          </ion-col>
+          
+        </ion-row>
+    </ion-list>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar class="ion-text-center">
+    <!-- <ion-toggle slot="start" mode="ios" [checked]="darkMode" (ionChange)="toggleDarkMode()"> Modo escuro </ion-toggle> -->
+     
+    <ion-note>
+      <p class="signup">Aplicativo para o CEAD @2023</p>
+    </ion-note>
+  </ion-toolbar>
+</ion-footer>
+
+<!-- Permissions -->
+  <!-- <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+     <uses-permission android:name="android.permission.INTERNET"/> -->
+
+
+         <!-- <ion-button color="primary" shape="round" (click)="scheduleNotification()">Notificaction</ion-button> -->
+
+      <!-- <ion-button expand="full" (click)="setUser()">Set User ID</ion-button> -->
+      <!-- <ion-button expand="full" (click)="setProperty()">Set User Property</ion-button> -->
+      <!-- <ion-button expand="full"(click)="logEvent('button_click', { button_id: 'submit_button' })">Log Event</ion-button> -->
+      <!-- <ion-button expand="full" routerLink="/login/singup">Go to second page</ion-button> -->
+      <!-- <ion-button expand="full" (click)="toggleAnalytics()">Toggle Data collection</ion-button> -->
+
+
+       <!-- <ion-row class="ion-margin-vertical">
+       <ion-col size="6" class="alignItems">
+          <div align="left">
+            <ion-checkbox formControlName="rememberMe"></ion-checkbox>
+      <ion-note>Lembrar senha</ion-note>
+          </div>
+        </ion-col>
+        <ion-col size="6">
+          <div align="right">
+            <ion-note disabled>Redefinir palavra-passe!</ion-note>
+          </div>
+        </ion-col> 
+         
+      </ion-row>-->

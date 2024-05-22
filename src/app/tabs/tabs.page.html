@@ -1,0 +1,39 @@
+<ion-tabs
+    #tabs
+    appGesture
+    [gestureOpts]="[{name: 'swipe'}]"
+    (swipe)="onSwipe($event)">
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home">
+      <ion-icon name="planet-sharp"></ion-icon>
+      <ion-label>Geral</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="pessoal">
+      <ion-icon name="logo-ionic"></ion-icon>
+      <ion-label>Para mim</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="contactenos">
+      <ion-icon name="chatbubble-sharp"></ion-icon>
+      <ion-label>Chat</ion-label>
+      <!-- <ion-icon name="notifications-circle-sharp"></ion-icon>
+      <ion-label>Informação</ion-label> -->
+    </ion-tab-button>
+
+    <ion-tab-button tab="utilizadores" *ngIf="isAdmin">
+      <ion-icon name="people-circle-sharp"></ion-icon>
+      <ion-label>Utilizadores</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="informacao" *ngIf="isAdmin">
+      <ion-icon name="notifications-circle-sharp"></ion-icon>
+      <ion-label>Informação</ion-label>
+      <!-- <ion-icon name="chatbubble-sharp"></ion-icon>
+      <ion-label>Chat</ion-label> -->
+    </ion-tab-button>
+
+  </ion-tab-bar>
+
+</ion-tabs>

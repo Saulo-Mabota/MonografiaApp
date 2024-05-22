@@ -1,0 +1,35 @@
+  <ion-item lines="full" (click)="redirect()" detail="true">
+    <ng-container *ngIf="loading; else content">
+      <ion-avatar slot="start">
+        <div class="skeleton"></div>
+      </ion-avatar>
+      <ion-label>
+        <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+        <p>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ng-container>
+    <ng-template #content>
+      <ion-avatar slot="start">
+        <img [src]="item?.imageUrl" />
+      </ion-avatar>
+      <ion-label>
+        {{ item?.username }}
+      </ion-label>
+    </ng-template>
+  </ion-item>
+
+
+
+  <!-- <ion-item lines="full" (click)="redirect()" detail="true">
+  <ion-avatar slot="start">
+    <img [src]="item?.imageUrl"/>
+  </ion-avatar>
+  <ion-label>
+    {{item?.username}}
+  </ion-label>
+  </ion-item> -->
