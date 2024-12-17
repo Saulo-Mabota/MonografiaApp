@@ -95,6 +95,7 @@ export class ChatService {//public auth: Observable<any>;
       throw (e);
     }
   }
+  
   getChatRooms() {
     this.getId();
     this.chatRooms = this.api.collectionDataQuery(

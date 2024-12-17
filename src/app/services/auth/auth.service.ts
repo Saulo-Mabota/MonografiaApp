@@ -161,6 +161,121 @@ export class AuthService {
       throw error;
     }
   }
+  // async deleteUser(userId: string): Promise<void> {
+  //   try {
+  //     // Get the current user
+  //     const auth = getAuth();
+  //     const currentUser = auth.currentUser;
+
+  //     if (!currentUser) {
+  //       throw new Error('No authenticated user found');
+  //     }
+
+  //     // Check if the current user is the one being deleted
+  //     if (currentUser.uid !== userId) {
+  //       throw new Error('You can only delete your own account');
+  //     }
+
+  //     // Delete user data from Firestore
+  //     await this.apiService.deleteDocument(`users/${userId}`);
+
+  //     // Delete user from Firebase Authentication
+  //     await currentUser.delete();
+
+  //     // Clear local user data
+  //     this._uid.next(null);
+  //     this.currentUser = null;
+
+  //     console.log('User deleted successfully');
+  //   } catch (error) {
+  //     console.error('Error deleting user:', error);
+  //     throw error;
+  //   }
+  // }
+  // async isCurrentUserAdmin(): Promise<boolean> {
+  //   const currentUser = this.fireAuth.currentUser;
+  //   if (!currentUser) return false;
+
+  //   const userData = await this.getUserData(currentUser.uid);
+  //   return userData?.isAdmin === true;
+  // }
+
+  // async deleteUser(userId: string): Promise<void> {
+  //   try {
+  //     const isAdmin = await this.isCurrentUserAdmin();
+      
+  //     if (!isAdmin) {
+  //       throw new Error('Only admins can delete users');
+  //     }
+
+  //     // Delete user data from Firestore
+  //     await this.apiService.deleteDocument(`users/${userId}`);
+
+  //     // For now, we'll just simulate this part
+  //     console.log(`User ${userId} would be deleted from Authentication here`);
+
+  //     console.log('User deleted successfully');
+  //   } catch (error) {
+  //     console.error('Error deleting user:', error);
+  //     throw error;
+  //   }
+  // }
+
+  async isCurrentUserAdmin(): Promise<boolean> {
+    const currentUser = this.fireAuth.currentUser;
+    if (!currentUser) {
+      console.log('No current user found');
+      return false;
+    }
+
+    try {
+      const userData = await this.getUserData(currentUser.uid);
+      console.log('User data:', userData);
+      return userData?.isAdmin === true;
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      return false;
+    }
+  }
+
+  async setCurrentUserAsAdmin(): Promise<void> {
+    const currentUser = this.fireAuth.currentUser;
+    if (!currentUser) {
+      throw new Error('No current user found');
+    }
+
+    try {
+      await this.apiService.updateDocument(`users/${currentUser.uid}`, { isAdmin: true });
+      console.log('Current user set as admin');
+    } catch (error) {
+      console.error('Error setting user as admin:', error);
+      throw error;
+    }
+  }
+
+  async deleteUser(userId: string): Promise<void> {
+    try {
+      const isAdmin = await this.isCurrentUserAdmin();
+      console.log('Is current user admin?', isAdmin);
+      
+      if (!isAdmin) {
+        throw new Error('Only admins can delete users');
+      }
+
+      // Delete user data from Firestore
+      await this.apiService.deleteDocument(`users/${userId}`);
+
+      // In a real-world scenario, you would call a secure server-side function here
+      // to delete the user from Firebase Authentication
+      // For now, we'll just simulate this part
+      console.log(`User ${userId} would be deleted from Authentication here`);
+
+      console.log('User deleted successfully');
+    } catch (error) {
+      console.error('Error deleting user:', error);
+      throw error;
+    }
+  }
 
 }
 

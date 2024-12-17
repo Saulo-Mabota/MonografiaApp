@@ -111,6 +111,44 @@ export class OpenuserPage implements OnInit {
     toast.present();
     this.modalCrtl.dismiss();
   }
+  
+  // async deleteUser() {
+  //   const alert = await this.alertController.create({
+  //     header: 'Confirmar Exclusão',
+  //     message: 'Tem certeza de que deseja excluir este usuário? Esta ação não pode ser desfeita.',
+  //     buttons: [
+  //       {
+  //         text: 'Cancelar',
+  //         role: 'cancel'
+  //       },
+  //       {
+  //         text: 'Excluir',
+  //         handler: async () => {
+  //           try {
+  //             // Call the auth service to delete the user
+  //             await this.authService.deleteUser(this.id);
+              
+  //             const toast = await this.toastCrtl.create({
+  //               message: 'Utilizador excluído com sucesso!',
+  //               duration: 2000
+  //             });
+  //             await toast.present();
+  //             this.modalCrtl.dismiss({ deleted: true });
+  //           } catch (error) {
+  //             console.error('Erro ao excluir usuário:', error);
+  //             const errorToast = await this.toastCrtl.create({
+  //               message: 'Falha ao excluir usuário. Por favor, tente novamente.',
+  //               duration: 2000,
+  //               color: 'danger'
+  //             });
+  //             await errorToast.present();
+  //           }
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   await alert.present();
+  // }
   pushLog(msg: string) {
     this.logs.pop();
   this.logs.unshift(msg);
@@ -133,5 +171,108 @@ export class OpenuserPage implements OnInit {
       buttons: ['OK'],
     });
     await alert.present();
+}
+// async deleteUser() {
+//   const alert = await this.alertController.create({
+//     header: 'Confirmar Exclusão',
+//     message: 'Tem certeza de que deseja excluir este usuário? Esta ação não pode ser desfeita.',
+//     buttons: [
+//       {
+//         text: 'Cancelar',
+//         role: 'cancel'
+//       },
+//       {
+//         text: 'Excluir',
+//         handler: async () => {
+//           try {
+//             await this.authService.deleteUser(this.id);
+            
+//             const toast = await this.toastCrtl.create({
+//               message: 'Utilizador excluído com sucesso!',
+//               duration: 2000
+//             });
+//             await toast.present();
+//             this.modalCrtl.dismiss({ deleted: true });
+//           } catch (error) {
+//             console.error('Erro ao excluir usuário:', error);
+//             let errorMessage = 'Falha ao excluir usuário. Por favor, tente novamente.';
+            
+//             if (error instanceof Error) {
+//               errorMessage = error.message;
+//             }
+            
+//             const errorToast = await this.toastCrtl.create({
+//               message: errorMessage,
+//               duration: 2000,
+//               color: 'danger'
+//             });
+//             await errorToast.present();
+//           }
+//         }
+//       }
+//     ]
+//   });
+//   await alert.present();
+// }
+async setCurrentUserAsAdmin() {
+  try {
+    await this.authService.setCurrentUserAsAdmin();
+    const toast = await this.toastCrtl.create({
+      message: 'Você agora é um administrador!',
+      duration: 2000
+    });
+    await toast.present();
+  } catch (error) {
+    console.error('Erro ao definir usuário como administrador:', error);
+    const errorToast = await this.toastCrtl.create({
+      message: 'Falha ao definir usuário como administrador.',
+      duration: 2000,
+      color: 'danger'
+    });
+    await errorToast.present();
+  }
+}
+
+async deleteUser() {
+  const alert = await this.alertController.create({
+    header: 'Confirmar Exclusão',
+    message: 'Tem certeza de que deseja excluir este usuário? Esta ação não pode ser desfeita.',
+    buttons: [
+      {
+        text: 'Cancelar',
+        role: 'cancel'
+      },
+      {
+        text: 'Excluir',
+        handler: async () => {
+          try {
+            await this.authService.deleteUser(this.id);
+            
+            const toast = await this.toastCrtl.create({
+              message: 'Utilizador excluído com sucesso!',
+              duration: 2000
+            });
+            await toast.present();
+            this.modalCrtl.dismiss({ deleted: true });
+          } catch (error) {
+            console.error('Erro ao excluir usuário:', error);
+            let errorMessage = 'Falha ao excluir usuário. Por favor, tente novamente.';
+            
+            if (error instanceof Error) {
+              errorMessage = error.message;
+            }
+            
+            const errorToast = await this.toastCrtl.create({
+              message: errorMessage,
+              duration: 2000,
+              color: 'danger'
+            });
+            await errorToast.present();
+          }
+        }
+      }
+    ]
+  });
+  await alert.present();
 }
 }

@@ -3,6 +3,7 @@ import {
   addDoc,
   collection,
   collectionData,
+  deleteDoc,
   doc,
   docData,
   DocumentData,
@@ -28,7 +29,10 @@ export class ApiService {
   docRef(path: string) {
     return doc(this.firestore, path);
   }
-
+  deleteDocument(path: string) {
+    const docRef = this.docRef(path);
+    return deleteDoc(docRef);
+  }
   setDocument(path: string, data: any) {
     const dataRef = this.docRef(path);
     return setDoc(dataRef, data);//set()

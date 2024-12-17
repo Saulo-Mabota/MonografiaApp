@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { ActionSheetController, AlertController, ModalController, PopoverController } from '@ionic/angular';
-import { Observable, Subject, map, take, takeUntil } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, delay, finalize, map, of, switchMap, take, takeUntil, tap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ChatService } from 'src/app/services/chat/chat.service';
 import { DataserviceService } from '../services/dataservice/dataservice.service';
@@ -32,6 +32,8 @@ export class contactenosPage {
   allUsersByCategory: any;
   filteredUsers: any[] | undefined;
   filteredChatRooms: any[] | undefined;
+  loading$ = new BehaviorSubject<boolean>(false);
+  chatRooms$!: Observable<any[]>;
   searchTerm: string = ''; // Variable to store the search term
 
   chatRooms!: Observable<any[]>;
@@ -59,18 +61,36 @@ export class contactenosPage {
     // this.getId();
     this.getRooms();
   }
+  
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
 
   getRooms() {
+    this.loading = true;
     this.chatService.getChatRooms();
     this.chatRooms = this.chatService.chatRooms;
+    this.loading = false;
    // this.filteredChatRooms = this.chatRooms;
-    console.log('chatrooms: ', this.chatRooms);
-    // this.loading = false;
+   // console.log('chatrooms: ', this.chatRooms);
   }
+
+  // getRooms() {
+  //   this.loading$.next(true);
+  //   this.chatRooms = of(null).pipe(
+  //     delay(1000), // Simulate network delay
+  //     switchMap(() => this.chatService.getChatRooms()),
+  //     tap(rooms => {
+  //       console.log('Rooms loaded:', rooms); // Add this line for debugging
+  //     }),
+  //     finalize(() => {
+  //       this.loading$.next(false);
+  //       console.log('Loading finished'); // Add this line for debugging
+  //     })
+  //   );
+  // }
+  
 
   searchChatRoom() {
     this.chatService.chatRooms.pipe(take(1)).subscribe(rooms => {
@@ -105,8 +125,10 @@ export class contactenosPage {
   newChat() {
 
     this.open_new_chat = true;
+    this.filteredUsers = undefined; // Reset filteredUsers to trigger loading state
   
     if (!this.users) this.getCategories();
+    
     // if (!this.users) this.getUsers();
   }
   async logout() {

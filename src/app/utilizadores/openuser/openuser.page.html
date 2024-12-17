@@ -2,10 +2,11 @@
   <ion-toolbar color="secondary">
     <ion-title>Detalhes do utilizador!</ion-title>
   </ion-toolbar>
+  <ion-button (click)="setCurrentUserAsAdmin()">Admin</ion-button>
 </ion-header>
 
 <ion-content>
-  <div *ngIf="userData">
+  <div *ngIf="userData"> 
     <form [formGroup]="signupForm">
     <ion-item>
       <ion-select aria-label="Categoria" placeholder="Trocar a categoria do utilizador!" (ionChange)="handleChange($event)" formControlName="category">
@@ -30,9 +31,9 @@
     <ion-button expand=""  (click)="updateUserInfo()"  color="dark" >
       <ion-icon name="save" slot="start"></ion-icon> ATUALIZAR
     </ion-button>
-    <!-- (click)="deleteNote()" -->
+
    
-    <ion-button expand="" disabled color="danger" >
+    <ion-button expand=""     (click)="deleteUser()"  color="danger" >
       <ion-icon name="trash" slot="start"></ion-icon> APAGAR
     </ion-button>
   

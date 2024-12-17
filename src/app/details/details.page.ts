@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { DataserviceService,Note } from '../services/dataservice/dataservice.service';
+import { DataserviceService,Note } from '../services/dataservice/dataservice.service'
 // import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 

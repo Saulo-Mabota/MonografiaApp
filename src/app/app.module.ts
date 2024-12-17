@@ -14,6 +14,8 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { GuardGuard } from './services/guards/guard.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnalytics,getAnalytics,ScreenTrackingService,UserTrackingService } from '@angular/fire/analytics';
+import { NotificationService } from './services/notification/notification.service';
+import { PushnotificationService } from 'src/app/services/notification/pushnotification.service';
 //import { ReactiveFormsModule } from '@angular/forms';
 //import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 
@@ -40,7 +42,9 @@ import { provideAnalytics,getAnalytics,ScreenTrackingService,UserTrackingService
        provideFirestore(() => getFirestore()),
        provideStorage(() => getStorage()),
        provideAnalytics(() => getAnalytics())],
-  providers: [GuardGuard,//GoogleAnalytics,
+  providers: [GuardGuard,//GoogleAnalytics,,
+    NotificationService, // Add this line
+    PushnotificationService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
     ScreenTrackingService,UserTrackingService],
   bootstrap: [AppComponent],

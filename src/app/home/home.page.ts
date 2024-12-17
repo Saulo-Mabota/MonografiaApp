@@ -2,7 +2,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ModalController } from '@ionic/angular';
+//import { AuthService } from 'src/app/services/auth/auth.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
+//import { DataserviceService } from '../services/dataservice/dataservice.service';
 import { DataserviceService } from '../services/dataservice/dataservice.service';
 // import Swiper from 'swiper';
 import { ChatService } from 'src/app/services/chat/chat.service';
